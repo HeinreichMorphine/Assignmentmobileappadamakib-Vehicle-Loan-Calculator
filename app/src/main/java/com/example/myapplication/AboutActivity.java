@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 public class AboutActivity extends AppCompatActivity {
 
@@ -19,13 +20,18 @@ public class AboutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
+
         TextView githubLink = findViewById(R.id.githubLink);
         SpannableString content = new SpannableString("GitHub Repository");
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         githubLink.setText(content);
 
         githubLink.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/your-repo"));
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/HeinreichMorphine/Assignmentmobileappadamakib"));
             startActivity(intent);
         });
     }
@@ -39,7 +45,10 @@ public class AboutActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.nav_home) {
+        if (id == android.R.id.home) {
+            onBackPressed();
+            return true;
+        } else if (id == R.id.nav_home) {
             startActivity(new Intent(this, HomeActivity.class));
             return true;
         } else if (id == R.id.nav_calculation) {

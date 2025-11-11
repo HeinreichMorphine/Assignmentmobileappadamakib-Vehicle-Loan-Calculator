@@ -7,20 +7,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText vehiclePrice, downPayment, interestRate, customLoanPeriod;
-    private RadioGroup loanPeriodRadioGroup;
+    private EditText vehiclePrice, downPayment, interestRate, loanPeriod;
     private TextView loanAmountResult, totalInterestResult, totalPaymentResult, monthlyPaymentResult;
 
     @Override
@@ -28,24 +26,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
+
         vehiclePrice = findViewById(R.id.vehiclePrice);
         downPayment = findViewById(R.id.downPayment);
         interestRate = findViewById(R.id.interestRate);
-        customLoanPeriod = findViewById(R.id.customLoanPeriod);
-        loanPeriodRadioGroup = findViewById(R.id.loanPeriodRadioGroup);
+        loanPeriod = findViewById(R.id.loanPeriod);
 
         loanAmountResult = findViewById(R.id.loanAmountResult);
         totalInterestResult = findViewById(R.id.totalInterestResult);
         totalPaymentResult = findViewById(R.id.totalPaymentResult);
         monthlyPaymentResult = findViewById(R.id.monthlyPaymentResult);
-
-        loanPeriodRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
-            if (checkedId == R.id.periodCustom) {
-                customLoanPeriod.setVisibility(View.VISIBLE);
-            } else {
-                customLoanPeriod.setVisibility(View.GONE);
-            }
-        });
 
         Button calculateButton = findViewById(R.id.calculateButton);
         calculateButton.setOnClickListener(v -> calculateLoan());
@@ -55,15 +49,10 @@ public class MainActivity extends AppCompatActivity {
         String priceStr = vehiclePrice.getText().toString();
         String downPaymentStr = downPayment.getText().toString();
         String rateStr = interestRate.getText().toString();
+        String yearsStr = loanPeriod.getText().toString();
 
-        if (priceStr.isEmpty() || downPaymentStr.isEmpty() || rateStr.isEmpty()) {
+        if (priceStr.isEmpty() || downPaymentStr.isEmpty() || rateStr.isEmpty() || yearsStr.isEmpty()) {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        int selectedId = loanPeriodRadioGroup.getCheckedRadioButtonId();
-        if (selectedId == -1) {
-            Toast.makeText(this, "Please select a loan period", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -71,26 +60,7 @@ public class MainActivity extends AppCompatActivity {
             double price = Double.parseDouble(priceStr);
             double dp = Double.parseDouble(downPaymentStr);
             double rate = Double.parseDouble(rateStr);
-
-            int years = 0;
-            if (selectedId == R.id.periodCustom) {
-                String customYearsStr = customLoanPeriod.getText().toString();
-                if (customYearsStr.isEmpty()) {
-                    Toast.makeText(this, "Please enter a custom loan period", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                years = Integer.parseInt(customYearsStr);
-            } else {
-                RadioButton selectedRadioButton = findViewById(selectedId);
-                String radioButtonText = selectedRadioButton.getText().toString();
-                if (radioButtonText.equals("5 Years")) {
-                    years = 5;
-                } else if (radioButtonText.equals("7 Years")) {
-                    years = 7;
-                } else if (radioButtonText.equals("9 Years")) {
-                    years = 9;
-                }
-            }
+            int years = Integer.parseInt(yearsStr);
 
             double loanAmount = price - dp;
             double totalInterest = loanAmount * (rate / 100) * years;
@@ -118,7 +88,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.nav_home) {
+        if (id == android.R.id.home) {
+            onBackPressed();
+            return true;
+        } else if (id == R.id.nav_home) {
             startActivity(new Intent(this, HomeActivity.class));
             return true;
         } else if (id == R.id.nav_calculation) {

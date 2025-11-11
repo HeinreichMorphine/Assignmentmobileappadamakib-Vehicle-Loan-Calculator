@@ -7,21 +7,28 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:fontFamily="sans-serif"
-    tools:context=".MainActivity">
+    tools:context="com.example.myapplication.MainActivity">
 
-    <TextView
-        android:id="@+id/appTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:background="@drawable/title_background"
-        android:padding="12dp"
-        android:text="Vehicle Loan Calculator"
-        android:textAlignment="center"
-        android:textSize="24sp"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/light_blue"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:title="Vehicle Loan Calculator"
+        app:titleTextColor="@android:color/white" />
+
+    <ImageView
+        android:id="@+id/appIcon"
+        android:layout_width="212dp"
+        android:layout_height="172dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/carpic"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <EditText
         android:id="@+id/vehiclePrice"
@@ -33,7 +40,7 @@
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appTitle" />
+        app:layout_constraintTop_toBottomOf="@id/appIcon" />
 
     <EditText
         android:id="@+id/downPayment"
@@ -84,11 +91,12 @@
 
     <LinearLayout
         android:id="@+id/resultLayout"
-        android:layout_width="344dp"
-        android:layout_height="132dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:background="@drawable/result_background"
         android:orientation="vertical"
+        android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/calculateButton">
@@ -97,40 +105,33 @@
             android:id="@+id/loanAmountResult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Loan Amount: " />
+            android:text="Loan Amount: "
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/totalInterestResult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Total Interest: " />
+            android:text="Total Interest: "
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/totalPaymentResult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Total Payment: " />
+            android:text="Total Payment: "
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/monthlyPaymentResult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Monthly Payment: " />
+            android:text="Monthly Payment: "
+            android:textSize="18sp" />
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/backButton"
-        style="@style/BlueButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="Back"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/resultLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
