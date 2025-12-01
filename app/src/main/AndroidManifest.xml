@@ -6,9 +6,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/moneysource"
+        android:icon="@drawable/baeb6d5fb59cdeda76ee7d68d963eb2"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/moneysource"
+        android:roundIcon="@drawable/baeb6d5fb59cdeda76ee7d68d963eb2"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
