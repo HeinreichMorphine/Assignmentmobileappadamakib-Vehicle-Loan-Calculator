@@ -46,13 +46,36 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void calculateLoan() {
+        vehiclePrice.setError(null);
+        downPayment.setError(null);
+        interestRate.setError(null);
+        loanPeriod.setError(null);
+
         String priceStr = vehiclePrice.getText().toString();
         String downPaymentStr = downPayment.getText().toString();
         String rateStr = interestRate.getText().toString();
         String yearsStr = loanPeriod.getText().toString();
 
-        if (priceStr.isEmpty() || downPaymentStr.isEmpty() || rateStr.isEmpty() || yearsStr.isEmpty()) {
-            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+        boolean hasError = false;
+
+        if (priceStr.isEmpty()) {
+            vehiclePrice.setError("Field cannot be empty");
+            hasError = true;
+        }
+        if (downPaymentStr.isEmpty()) {
+            downPayment.setError("Field cannot be empty");
+            hasError = true;
+        }
+        if (rateStr.isEmpty()) {
+            interestRate.setError("Field cannot be empty");
+            hasError = true;
+        }
+        if (yearsStr.isEmpty()) {
+            loanPeriod.setError("Field cannot be empty");
+            hasError = true;
+        }
+
+        if (hasError) {
             return;
         }
 
@@ -61,6 +84,34 @@ public class MainActivity extends AppCompatActivity {
             double dp = Double.parseDouble(downPaymentStr);
             double rate = Double.parseDouble(rateStr);
             int years = Integer.parseInt(yearsStr);
+
+            if (price <= 0) {
+                vehiclePrice.setError("Price must be positive");
+                hasError = true;
+            }
+            if (dp < 0) {
+                downPayment.setError("Down payment cannot be negative");
+                hasError = true;
+            }
+
+            if (dp > price) {
+                downPayment.setError("Down payment cannot be greater than the vehicle price");
+                hasError = true;
+            }
+
+            if (rate <= 0) {
+                interestRate.setError("Interest rate must be positive");
+                hasError = true;
+            }
+
+            if (years <= 0) {
+                loanPeriod.setError("Loan period must be positive");
+                hasError = true;
+            }
+
+            if (hasError) {
+                return;
+            }
 
             double loanAmount = price - dp;
             double totalInterest = loanAmount * (rate / 100) * years;
