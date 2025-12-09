@@ -1,15 +1,49 @@
-*.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+# Folders and files commented out are NOT ignored by git.
+# Uncommenting them will make git ignore them.
+
+# Built application files
+*.apk
+*.aab
+*.ap_
+*.jar
+*.war
+*.ear
+
+# Files for the Dalvik VM
+*.dex
+
+# Java class files
+*.class
+
+# Generated files
+build/
+.cxx/
+
+# Gradle files
+.gradle/
+
+# Local configuration file (sdk path, etc)
 local.properties
+
+# IDE files
+.idea/
+*.iml
+#*.ipr
+#*.iws
+.project
+.classpath
+.settings/
+
+# OSX files
+.DS_Store
+
+# Keystore files
+*.jks
+*.keystore
+
+# Log files
+*.log
+
+# Android Studio generated files
+captures/
+.externalNativeBuild/

@@ -21,14 +21,10 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         Button goToCalculationButton = findViewById(R.id.goToCalculationButton);
-        goToCalculationButton.setOnClickListener(v -> {
-            startActivity(new Intent(this, MainActivity.class));
-        });
+        goToCalculationButton.setOnClickListener(v -> startActivity(new Intent(this, MainActivity.class)));
 
         Button goToAboutButton = findViewById(R.id.goToAboutButton);
-        goToAboutButton.setOnClickListener(v -> {
-            startActivity(new Intent(this, AboutActivity.class));
-        });
+        goToAboutButton.setOnClickListener(v -> startActivity(new Intent(this, AboutActivity.class)));
     }
 
     @Override

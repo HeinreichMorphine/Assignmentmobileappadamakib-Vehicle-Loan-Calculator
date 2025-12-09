@@ -50,6 +50,10 @@ public class MainActivity extends AppCompatActivity {
         downPayment.setError(null);
         interestRate.setError(null);
         loanPeriod.setError(null);
+        loanAmountResult.setText("");
+        totalInterestResult.setText("");
+        totalPaymentResult.setText("");
+        monthlyPaymentResult.setText("");
 
         String priceStr = vehiclePrice.getText().toString();
         String downPaymentStr = downPayment.getText().toString();
