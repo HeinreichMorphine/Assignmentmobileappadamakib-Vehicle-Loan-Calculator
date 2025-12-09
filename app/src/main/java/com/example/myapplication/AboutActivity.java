@@ -31,7 +31,7 @@ public class AboutActivity extends AppCompatActivity {
         githubLink.setText(content);
 
         githubLink.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/HeinreichMorphine/Assignmentmobileappadamakib"));
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/HeinreichMorphine/Assignmentmobileappadamakib-Vehicle-Loan-Calculator"));
             startActivity(intent);
         });
     }
