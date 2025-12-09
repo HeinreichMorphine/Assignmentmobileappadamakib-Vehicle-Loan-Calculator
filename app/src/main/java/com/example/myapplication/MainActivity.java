@@ -86,30 +86,26 @@ public class MainActivity extends AppCompatActivity {
             int years = Integer.parseInt(yearsStr);
 
             if (price <= 0) {
-                vehiclePrice.setError("Price must be positive");
-                hasError = true;
+                Toast.makeText(this, "Price must be positive", Toast.LENGTH_SHORT).show();
+                return;
             }
             if (dp < 0) {
-                downPayment.setError("Down payment cannot be negative");
-                hasError = true;
+                Toast.makeText(this, "Down payment cannot be negative", Toast.LENGTH_SHORT).show();
+                return;
             }
 
             if (dp > price) {
-                downPayment.setError("Down payment cannot be greater than the vehicle price");
-                hasError = true;
+                Toast.makeText(this, "Down payment cannot be greater than the vehicle price", Toast.LENGTH_SHORT).show();
+                return;
             }
 
             if (rate <= 0) {
-                interestRate.setError("Interest rate must be positive");
-                hasError = true;
+                Toast.makeText(this, "Interest rate must be positive", Toast.LENGTH_SHORT).show();
+                return;
             }
 
             if (years <= 0) {
-                loanPeriod.setError("Loan period must be positive");
-                hasError = true;
-            }
-
-            if (hasError) {
+                Toast.makeText(this, "Loan period must be positive", Toast.LENGTH_SHORT).show();
                 return;
             }
 
